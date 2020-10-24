@@ -22,12 +22,8 @@ public class RedBlackTreeImpl implements RedBlackTree {
             isRedNode = redNode;
         }
 
-        public Color getColor() {
-            return (isRedNode ? Color.RED : Color.BLACK);
-        }
-
-        public void setColor(Color color) {
-            this.isRedNode = color != Color.BLACK;
+        public boolean isRedNode() {
+            return isRedNode;
         }
     }
 
@@ -43,10 +39,10 @@ public class RedBlackTreeImpl implements RedBlackTree {
 
     private void balance(Node node) {
         if (node == root) {
-            node.setColor(Color.BLACK);
+            node.setRedNode(false);
         }
 
-        if (node != root && node.parent.getColor() == Color.RED) {
+        if (node != root && node.parent.isRedNode()) {
             if (isUncleRed(node)) {
                 recolor(node);
             } else {
@@ -57,9 +53,9 @@ public class RedBlackTreeImpl implements RedBlackTree {
 
     public void recolor(Node node) {
         Node uncle = getUncle(node);
-        uncle.setColor(Color.BLACK);
-        node.parent.setColor(Color.BLACK);
-        node.parent.parent.setColor(Color.RED);
+        uncle.setRedNode(false);
+        node.parent.setRedNode(false);
+        node.parent.parent.setRedNode(true);
         balance(node.parent.parent);
     }
 
@@ -190,7 +186,7 @@ public class RedBlackTreeImpl implements RedBlackTree {
             return false;
         }
 
-        return uncle.getColor() == Color.RED;
+        return uncle.isRedNode();
     }
 
     @Override

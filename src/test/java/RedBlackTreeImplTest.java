@@ -55,21 +55,21 @@ class RedBlackTreeImplTest {
     @Test
     public void colorTest() {
         redBlackTree.insertElement('J');
-        Assertions.assertEquals(Color.BLACK, redBlackTree.findNode('J').getColor());
+        Assertions.assertFalse(redBlackTree.findNode('J').isRedNode());
         redBlackTree.insertElement('T');
-        Assertions.assertEquals(Color.BLACK, redBlackTree.findNode('J').getColor());
-        Assertions.assertEquals(Color.RED, redBlackTree.findNode('T').getColor());
+        Assertions.assertFalse(redBlackTree.findNode('J').isRedNode());
+        Assertions.assertTrue(redBlackTree.findNode('T').isRedNode());
 
         redBlackTree.insertElement('Z');
-        Assertions.assertEquals(Color.RED, redBlackTree.findNode('J').getColor());
-        Assertions.assertEquals(Color.BLACK, redBlackTree.findNode('T').getColor());
-        Assertions.assertEquals(Color.RED, redBlackTree.findNode('Z').getColor());
+        Assertions.assertTrue(redBlackTree.findNode('J').isRedNode());
+        Assertions.assertFalse(redBlackTree.findNode('T').isRedNode());
+        Assertions.assertTrue(redBlackTree.findNode('Z').isRedNode());
 
         redBlackTree.insertElement('O');
-        Assertions.assertEquals(Color.BLACK, redBlackTree.findNode('T').getColor());
-        Assertions.assertEquals(Color.BLACK, redBlackTree.findNode('Z').getColor());
-        Assertions.assertEquals(Color.BLACK, redBlackTree.findNode('J').getColor());
-        Assertions.assertEquals(Color.RED, redBlackTree.findNode('O').getColor());
+        Assertions.assertFalse(redBlackTree.findNode('T').isRedNode());
+        Assertions.assertFalse(redBlackTree.findNode('Z').isRedNode());
+        Assertions.assertFalse(redBlackTree.findNode('J').isRedNode());
+        Assertions.assertTrue(redBlackTree.findNode('O').isRedNode());
     }
 
     @Test
@@ -83,13 +83,13 @@ class RedBlackTreeImplTest {
         redBlackTree.insertElement('K');
         redBlackTree.insertElement('Z');
 
-        Assertions.assertEquals(Color.BLACK, redBlackTree.findNode('G').getColor());
-        Assertions.assertEquals(Color.BLACK, redBlackTree.findNode('C').getColor());
-        Assertions.assertEquals(Color.RED, redBlackTree.findNode('R').getColor());
-        Assertions.assertEquals(Color.BLACK, redBlackTree.findNode('J').getColor());
-        Assertions.assertEquals(Color.BLACK, redBlackTree.findNode('V').getColor());
-        Assertions.assertEquals(Color.RED, redBlackTree.findNode('H').getColor());
-        Assertions.assertEquals(Color.RED, redBlackTree.findNode('K').getColor());
-        Assertions.assertEquals(Color.RED, redBlackTree.findNode('Z').getColor());
+        Assertions.assertFalse(redBlackTree.findNode('G').isRedNode());
+        Assertions.assertFalse(redBlackTree.findNode('C').isRedNode());
+        Assertions.assertTrue(redBlackTree.findNode('R').isRedNode());
+        Assertions.assertFalse(redBlackTree.findNode('J').isRedNode());
+        Assertions.assertFalse(redBlackTree.findNode('V').isRedNode());
+        Assertions.assertTrue(redBlackTree.findNode('H').isRedNode());
+        Assertions.assertTrue(redBlackTree.findNode('K').isRedNode());
+        Assertions.assertTrue(redBlackTree.findNode('Z').isRedNode());
     }
 }
