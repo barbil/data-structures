@@ -64,12 +64,12 @@ public class RedBlackTreeImpl implements RedBlackTree {
             applyLeftLeftCase(node);
         } else if (isLeftRightCase(node)) {
             rotateLeft(node.parent);
-            applyLeftLeftCase(node);
+            applyLeftLeftCase(node.left);
         } else if (isRightRightCase(node)) {
             applyRightRightCase(node);
         } else if (isRightLeftCase(node)) {
             rotateRight(node.parent);
-            applyRightRightCase(node);
+            applyRightRightCase(node.right);
         }
     }
 
@@ -121,11 +121,16 @@ public class RedBlackTreeImpl implements RedBlackTree {
         Node x = node.left;
         Node temp = x.right;
 
-        if (y.parent.left == y) {
-            y.parent.left = x;
+        if (y.parent != null) {
+            if (y.parent.left == y) {
+                y.parent.left = x;
+            } else {
+                y.parent.right = x;
+            }
         } else {
-            y.parent.right = x;
+            root = x;
         }
+
 
         x.parent = y.parent;
         x.right = y;
